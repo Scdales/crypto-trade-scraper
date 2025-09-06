@@ -132,7 +132,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("{}: Connected to MEXC", print_now());
 
     let subscription = MexcSubscriptionMessage {
-        method: "SUBSCRIBE".to_string(),
+        method: "SUBSCRIPTION".to_string(),
         params: vec!["spot@public.bookTicker.v3.api@BTCUSDT".to_string()],
         id: 1,
     };
@@ -180,7 +180,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                                     println!("{}: Reconnected successfully", print_now());
 
                                     let subscription = MexcSubscriptionMessage {
-                                        method: "SUBSCRIBE".to_string(),
+                                        method: "SUBSCRIPTION".to_string(),
                                         params: vec!["spot@public.bookTicker.v3.api@BTCUSDT".to_string()],
                                         id: 1,
                                     };
