@@ -1,0 +1,33 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Harmonic Detector",
+            "type": "python",
+            "request": "launch",
+            "program": "main.py",
+            "cwd": "${workspaceRoot}/src/experiments/harmonic_detector",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "envFile": "${workspaceRoot}/.env",
+            "env": {
+                "REDIS_HOST": "localhost",
+                "PYTHONUNBUFFERED": "0"
+            }
+        },
+        {
+            "name": "Bollinger Bands",
+            "type": "python",
+            "request": "launch",
+            "program": "src/experiments/bollinger_signal/main.py",
+            "justMyCode": true,
+            "envFile": "${workspaceRoot}/.env",
+            "env": {
+                "REDIS_HOST": "localhost"
+            }
+        }
+    ]
+}
