@@ -1,0 +1,10 @@
+{
+    "search.exclude": {
+       "**/node_modules": true,
+       "out/**": true, // Don't search the TypeScript "out" folder
+       "eslint.autoFixOnSave": true,
+   },
+   "[python]": {
+      "editor.defaultFormatter": "ms-python.autopep8"
+   }
+  }
