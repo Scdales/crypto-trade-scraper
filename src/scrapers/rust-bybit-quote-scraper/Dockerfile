@@ -1,44 +1,22 @@
 # Multi-stage selection based on ENV argument
 ARG ENV=dev
 
-# Include the shared template
-FROM scratch AS template-source
-COPY Dockerfile.template /
-
-# Use the template with the specific scraper name
-FROM template-source AS template
-ARG SCRAPER_NAME=rust-bybit-quote-scraper
-
-# Base stage with Rust toolchain and common dependencies
+# Use the shared dependency cache as base
 FROM rust:1.89-bookworm AS base
 WORKDIR /app
 
-# Install system dependencies that might be needed across scrapers
-RUN apt-get update && apt-get install -y \
-    pkg-config \
-    libssl-dev \
-    ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
+# Copy scraper-specific source code
+COPY Cargo.toml Cargo.lock ./
+COPY src ./src
 
-# Set common environment variables
-ENV RUST_BACKTRACE=1
-ENV CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
-
-# Copy the specific scraper source
-COPY rust-bybit-quote-scraper/ ./
-
-# Development stage - runs cargo run directly
+# Development stage - runs cargo run directly with pre-compiled dependencies
 FROM base AS dev
+WORKDIR /app
 CMD ["cargo", "run"]
 
-# Dependency caching stage - builds only dependencies
-FROM base AS deps
-RUN cargo build --release --locked
-RUN rm src/*.rs target/release/deps/rust_bybit_quote_scraper*
-
-# Build stage for production - builds the actual binary
-FROM deps AS builder
-COPY rust-bybit-quote-scraper/src ./src
+# Build stage for production - builds only the application binary
+FROM base AS builder
+WORKDIR /app
 RUN cargo build --release --locked
 
 # Production runtime stage - minimal image with just the binary
@@ -64,4 +42,5 @@ RUN chmod +x /usr/local/bin/scraper \
 USER scraper
 CMD ["/usr/local/bin/scraper"]
 
+# Multi-stage selection based on ENV argument
 FROM ${ENV} AS final

@@ -1,15 +1,4 @@
 services:
-  rust-base-cache:
-    container_name: rust-base-cache
-    build:
-      context: src/scrapers
-      dockerfile: Dockerfile.template
-      target: base
-      args:
-        BUILDKIT_INLINE_CACHE: 1
-    image: rust-base-cache:latest
-    profiles:
-      - cache-builder
   cache:
     container_name: cache
     image: redislabs/redistimeseries
@@ -53,13 +42,9 @@ services:
   rust-bitmex-quote-scraper:
     container_name: rust-bitmex-quote-scraper
     build:
-      context: src/scrapers
-      dockerfile: rust-bitmex-quote-scraper/Dockerfile
+      context: src/scrapers/rust-bitmex-quote-scraper
       args:
         ENV: ${ENV:-prod}
-        BUILDKIT_INLINE_CACHE: 1
-      cache_from:
-        - rust-base-cache:latest
     depends_on:
       cache:
         condition: service_healthy
@@ -72,13 +57,9 @@ services:
   rust-binance-quote-scraper:
     container_name: rust-binance-quote-scraper
     build:
-      context: src/scrapers
-      dockerfile: rust-binance-quote-scraper/Dockerfile
+      context: src/scrapers/rust-binance-quote-scraper
       args:
         ENV: ${ENV:-prod}
-        BUILDKIT_INLINE_CACHE: 1
-      cache_from:
-        - rust-base-cache:latest
     depends_on:
       cache:
         condition: service_healthy
@@ -91,13 +72,9 @@ services:
   rust-coinbase-quote-scraper:
     container_name: rust-coinbase-quote-scraper
     build:
-      context: src/scrapers
-      dockerfile: rust-coinbase-quote-scraper/Dockerfile
+      context: src/scrapers/rust-coinbase-quote-scraper
       args:
         ENV: ${ENV:-prod}
-        BUILDKIT_INLINE_CACHE: 1
-      cache_from:
-        - rust-base-cache:latest
     depends_on:
       cache:
         condition: service_healthy
@@ -110,13 +87,9 @@ services:
   rust-bybit-quote-scraper:
     container_name: rust-bybit-quote-scraper
     build:
-      context: src/scrapers
-      dockerfile: rust-bybit-quote-scraper/Dockerfile
+      context: src/scrapers/rust-bybit-quote-scraper
       args:
         ENV: ${ENV:-prod}
-        BUILDKIT_INLINE_CACHE: 1
-      cache_from:
-        - rust-base-cache:latest
     depends_on:
       cache:
         condition: service_healthy
@@ -129,13 +102,9 @@ services:
   rust-okx-quote-scraper:
     container_name: rust-okx-quote-scraper
     build:
-      context: src/scrapers
-      dockerfile: rust-okx-quote-scraper/Dockerfile
+      context: src/scrapers/rust-okx-quote-scraper
       args:
         ENV: ${ENV:-prod}
-        BUILDKIT_INLINE_CACHE: 1
-      cache_from:
-        - rust-base-cache:latest
     depends_on:
       cache:
         condition: service_healthy
@@ -148,13 +117,9 @@ services:
   rust-bitget-quote-scraper:
     container_name: rust-bitget-quote-scraper
     build:
-      context: src/scrapers
-      dockerfile: rust-bitget-quote-scraper/Dockerfile
+      context: src/scrapers/rust-bitget-quote-scraper
       args:
         ENV: ${ENV:-prod}
-        BUILDKIT_INLINE_CACHE: 1
-      cache_from:
-        - rust-base-cache:latest
     depends_on:
       cache:
         condition: service_healthy
@@ -167,13 +132,9 @@ services:
   rust-kucoin-quote-scraper:
     container_name: rust-kucoin-quote-scraper
     build:
-      context: src/scrapers
-      dockerfile: rust-kucoin-quote-scraper/Dockerfile
+      context: src/scrapers/rust-kucoin-quote-scraper
       args:
         ENV: ${ENV:-prod}
-        BUILDKIT_INLINE_CACHE: 1
-      cache_from:
-        - rust-base-cache:latest
     depends_on:
       cache:
         condition: service_healthy
@@ -186,13 +147,9 @@ services:
   rust-gateio-quote-scraper:
     container_name: rust-gateio-quote-scraper
     build:
-      context: src/scrapers
-      dockerfile: rust-gateio-quote-scraper/Dockerfile
+      context: src/scrapers/rust-gateio-quote-scraper
       args:
         ENV: ${ENV:-prod}
-        BUILDKIT_INLINE_CACHE: 1
-      cache_from:
-        - rust-base-cache:latest
     depends_on:
       cache:
         condition: service_healthy
@@ -205,13 +162,9 @@ services:
   rust-htx-quote-scraper:
     container_name: rust-htx-quote-scraper
     build:
-      context: src/scrapers
-      dockerfile: rust-htx-quote-scraper/Dockerfile
+      context: src/scrapers/rust-htx-quote-scraper
       args:
         ENV: ${ENV:-prod}
-        BUILDKIT_INLINE_CACHE: 1
-      cache_from:
-        - rust-base-cache:latest
     depends_on:
       cache:
         condition: service_healthy
@@ -224,13 +177,9 @@ services:
   rust-mexc-quote-scraper:
     container_name: rust-mexc-quote-scraper
     build:
-      context: src/scrapers
-      dockerfile: rust-mexc-quote-scraper/Dockerfile
+      context: src/scrapers/rust-mexc-quote-scraper
       args:
         ENV: ${ENV:-prod}
-        BUILDKIT_INLINE_CACHE: 1
-      cache_from:
-        - rust-base-cache:latest
     depends_on:
       cache:
         condition: service_healthy
@@ -243,13 +192,9 @@ services:
   rust-kraken-quote-scraper:
     container_name: rust-kraken-quote-scraper
     build:
-      context: src/scrapers
-      dockerfile: rust-kraken-quote-scraper/Dockerfile
+      context: src/scrapers/rust-kraken-quote-scraper
       args:
         ENV: ${ENV:-prod}
-        BUILDKIT_INLINE_CACHE: 1
-      cache_from:
-        - rust-base-cache:latest
     depends_on:
       cache:
         condition: service_healthy
@@ -262,13 +207,9 @@ services:
   rust-bitfinex-quote-scraper:
     container_name: rust-bitfinex-quote-scraper
     build:
-      context: src/scrapers
-      dockerfile: rust-bitfinex-quote-scraper/Dockerfile
+      context: src/scrapers/rust-bitfinex-quote-scraper
       args:
         ENV: ${ENV:-prod}
-        BUILDKIT_INLINE_CACHE: 1
-      cache_from:
-        - rust-base-cache:latest
     depends_on:
       cache:
         condition: service_healthy
